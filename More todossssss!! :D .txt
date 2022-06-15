@@ -1,0 +1,17 @@
+Q• admin-configurable session timeout, default much longer
+Q• warn users before editing if they aren't logged in (or say "Edit as Anonymous"; unless that's not allowed on the wiki, in which case no worries! XD )
+Q• DON'T let someone who's not actually logged in act as though they are!!!LKJFLkjflsdkfjdlfj like recording them in a page's official edit history exactly like they were logged in!! sdlfkjdflkfjlf
+	Just remove the entire ASSERTED system dslfjsdflkfj X'D
+		Unless maybe it's actually done securely idk
+Q• configurable max length for edit comments (and MUCH longer by default; like, 4000 chars!! XD )
+Q• renaming pages X'D
+Q• tooltip links :D
+Q• configurable landing page (not hardcoded as "Main")
+Q• titles that are different from the page name!  (like wikipedia has for pages that start with lowercase letters, or end in question marks!)
+Q!!• TALK PAGES (or better yet, talk Discussions! and make a whole proper forum/chat system! :DD )
+Q• user pages!
+Q• semantic usernames in page history!!  (so when users change their name, it doesn't CORRUPT THE PAGE HISTORY DATABASE X"D )
+	• And also renames the user page!  (and updates links to it!!)
+Q• New Page feature! sldkjdslfkdsjf X'D
+Q• page (or pseudotemplate!!) that lists all of the available pages.
+Q• formatting ''inside'' links (eg, for part to be italicized)
