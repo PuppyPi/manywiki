@@ -77,9 +77,11 @@
    <filter-mapping>
        <filter-name>WikiServletFilter</filter-name>
        <url-pattern>/attach/*</url-pattern>
+       <!--
        <url-pattern>/atom/*</url-pattern>
        <url-pattern>/RPCU/</url-pattern>
        <url-pattern>/RPC2/</url-pattern>
+       -->
    </filter-mapping>
    <filter-mapping>
        <filter-name>WikiJSPFilter</filter-name>
@@ -94,17 +96,18 @@
       <listener-class>org.apache.wiki.auth.SessionMonitor</listener-class>
    </listener>
 
-   <!-- servlet context listener to configure API's SPI -->
+   <!-- servlet context listener to configure API's SPI - ->
    <listener>
        <listener-class>org.apache.wiki.bootstrap.WikiBootstrapServletContextListener</listener-class>
    </listener>
+   -->
 
    <!--
        Now, let's define the XML-RPC interfaces.  You probably don't have to
        touch these.
 
        First, we'll define the standard XML-RPC interface.
-     -->
+     - ->
    <servlet>
        <servlet-name>XMLRPC</servlet-name>
        <servlet-class>org.apache.wiki.xmlrpc.RPCServlet</servlet-class>
@@ -118,10 +121,11 @@
            <param-value>wiki</param-value>
        </init-param>
    </servlet>
+   -->
 
    <!--
        OK, this then defines that our UTF-8 -capable server.
-     -->
+     - ->
 
    <servlet>
        <servlet-name>XMLRPC-UTF8</servlet-name>
@@ -136,6 +140,7 @@
            <param-value>wiki</param-value>
        </init-param>
    </servlet>
+   -->
 
     <!-- WikiAjaxDispatcherServlet -->
     <servlet>
@@ -144,11 +149,12 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
-   <!-- Atom Publishing Protocol -->
+   <!-- Atom Publishing Protocol - ->
    <servlet>
        <servlet-name>ATOM</servlet-name>
        <servlet-class>org.apache.wiki.rpc.atom.AtomAPIServlet</servlet-class>
    </servlet>
+   -->
 
    <!-- Maps short URLS to JSPs; also, detects webapp shutdown. -->
    <servlet>
@@ -371,5 +377,9 @@
    </security-role>
 
    REMOVE ME TO ENABLE CONTAINER-MANAGED AUTH  -->
-
+   
+   <session-config>
+      <session-timeout>43200</session-timeout>
+   </session-config>
+   
 </web-app>
