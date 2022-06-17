@@ -1,7 +1,14 @@
 package org.apache.wiki;
 
+import org.apache.wiki.diff.ContextualDiffProvider;
+import org.apache.wiki.diff.ExternalDiffProvider;
+import org.apache.wiki.diff.TraditionalDiffProvider;
+import org.apache.wiki.providers.BasicAttachmentProvider;
+import org.apache.wiki.providers.CachingAttachmentProvider;
 import org.apache.wiki.providers.FileSystemProvider;
 import org.apache.wiki.providers.VersioningFileProvider;
+import org.apache.wiki.search.BasicSearchProvider;
+import org.apache.wiki.search.LuceneSearchProvider;
 import rebound.annotations.semantic.meta.dependencies.DependencyClass;
 import rebound.annotations.semantic.meta.dependencies.DependencyFile;
 
@@ -20,9 +27,20 @@ import rebound.annotations.semantic.meta.dependencies.DependencyFile;
 @DependencyClass(org.apache.wiki.render.XHTMLRenderer.class)
 @DependencyClass(org.hsqldb.jdbc.JDBCDriver.class)
 
-//jspwiki-custom.properties!
 @DependencyClass(FileSystemProvider.class)
 @DependencyClass(VersioningFileProvider.class)
+
+@DependencyClass(BasicAttachmentProvider.class)
+@DependencyClass(CachingAttachmentProvider.class)
+
+@DependencyClass(TraditionalDiffProvider.class)
+@DependencyClass(ContextualDiffProvider.class)
+@DependencyClass(ExternalDiffProvider.class)
+
+@DependencyClass(BasicSearchProvider.class)
+@DependencyClass(LuceneSearchProvider.class)
+//@DependencyClass(TikaSearchProvider.class)
+//@DependencyClass(KendraSearchProvider.class)
 
 public class DependenciesOfJSPWikiProperties
 {
