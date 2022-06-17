@@ -3,6 +3,9 @@ package org.apache.wiki;
 import org.apache.wiki.providers.FileSystemProvider;
 import org.apache.wiki.providers.VersioningFileProvider;
 import rebound.annotations.semantic.meta.dependencies.DependencyClass;
+import rebound.annotations.semantic.meta.dependencies.DependencyFile;
+
+@DependencyFile("org/apache/wiki/util/jspwiki.properties")
 
 //@DependencyClass(org.apache.lucene.analysis.standard.ClassicAnalyzer.class)  //Is this bitrotted??
 @DependencyClass(org.apache.wiki.auth.acl.DefaultAclManager.class)
