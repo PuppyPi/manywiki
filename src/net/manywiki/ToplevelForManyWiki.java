@@ -14,8 +14,8 @@ import org.apache.wiki.ajax.WikiAjaxletDispatcher;
 import rebound.annotations.semantic.temporal.concurrencyprimitives.threadspecification.AnyThreads;
 import rebound.simplejee.AbstractHttpServlet;
 import rebound.spots.SpotsDispatcher;
-import rebound.spots.util.SpotsDispatcherForBeansWithViewResourcePath;
 import rebound.util.collections.PairOrdered;
+import rebound.util.functional.FunctionInterfaces.UnaryProcedure;
 
 ////////// THIS IS THE SOLE TOPLEVEL CLASS FOR MANYWIKI //////////
 
@@ -59,7 +59,16 @@ extends AbstractHttpServlet
 			
 			PairOrdered<Class<? extends ManyWikiActionBean>, String> p = getActionBeanClassAndViewResourcePathname(request.getRequestURI());  //getRequestURI() should really be getRequestURIPath() because it doesn't include the query string (which is the only thing it could include other than the path in HTTP!)
 			
-			SpotsDispatcherForBeansWithViewResourcePath.dispatch(getServletConfig().getServletContext(), request, response, p.getA(), p.getB(), TemporaryManyWikiRoot.isLoggingAllHitsToServletLogs());
+			Class<? extends ManyWikiActionBean> actionBeanClass = p.getA();
+			String viewResourcePath = p.getB();
+			
+			UnaryProcedure<ManyWikiActionBean> initializeActionBean = bean ->
+			{
+				bean.setViewResourcePath(viewResourcePath);
+				bean.setWikiEngine(wikiEngine);
+			};
+			
+			SpotsDispatcher.dispatch(getServletConfig().getServletContext(), request, response, actionBeanClass, initializeActionBean, TemporaryManyWikiRoot.isLoggingAllHitsToServletLogs());
 		}
 	}
 	
