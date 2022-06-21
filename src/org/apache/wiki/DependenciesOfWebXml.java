@@ -3,7 +3,7 @@ package org.apache.wiki;
 import rebound.annotations.semantic.meta.dependencies.DependencyClass;
 
 @DependencyClass(org.apache.wiki.WikiServlet.class)
-@DependencyClass(org.apache.wiki.ajax.WikiAjaxDispatcherServlet.class)
+@DependencyClass(org.apache.wiki.ajax.WikiAjaxletDispatcher.class)
 @DependencyClass(org.apache.wiki.attachment.AttachmentServlet.class)
 @DependencyClass(org.apache.wiki.auth.SessionMonitor.class)
 @DependencyClass(org.apache.wiki.ui.WikiJSPFilter.class)
