@@ -19,3 +19,8 @@ Q• formatting ''inside'' links (eg, for part to be italicized)
 Q• watch page!!
 	then mods can watch the "Ban Proposal" secret mod-only page!
 	..or should that be done in ManyTalk?  probably, since it's transient!  so then this todo applies to subscribing to ManyTalk channels to get alerts on new posts!
+
+• Every page in ManyWiki should have the UUID of the "realm" or whatever we call that, small in the footer with a link to the instance's security policy, so that if they put in a theme that like, redirects people to mafia.ru with an iframe XD then people can take issue *with the people responsible* (the realm admin[s]), and not the manywiki hoster themselves, being a Service Provider not Content Producer!
+	(the UUID being essential because they might change their name around to confuse people and make the instance hoster take the rap!)
+	If that manywiki instance *wants* that!  Maybe they don't, so make it optional :3  (particularly for single-realm instances XD )
+	• and even without custom superthemes, this could be an issue simply because they could put illegal content up, like any wiki!! (eg, fandom.com)
