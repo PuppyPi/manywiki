@@ -26,6 +26,8 @@ import rebound.util.functional.FunctionInterfaces.UnaryProcedure;
 
 ////////// THIS IS THE SOLE TOPLEVEL CLASS FOR MANYWIKI //////////
 
+//TODO-PP use a decorator for the request to capture the session creation and set the expiration time of it! :D
+
 @AccessedDynamicallyOrExternallyToJavaOrKnownToBeInImportantSerializedUse   //If you rename this class or move it to a different package, you MUST UPDATE WEB.XML!!  But that is the only string or text file that needs to be updated if any codething in ManyWiki is renamed or reorganized! The rest can be done by normal automatic Java refactoring!!  :DD
 public class ToplevelServletForManyWiki
 extends AbstractHttpServlet
