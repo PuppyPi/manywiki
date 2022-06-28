@@ -1,6 +1,7 @@
 package net.manywiki;
 
 import static rebound.text.StringUtilities.*;
+import static rebound.util.ExceptionPrettyPrintingUtilities.*;
 import static rebound.util.collections.BasicCollectionUtilities.*;
 import java.io.IOException;
 import java.net.URI;
@@ -53,36 +54,43 @@ extends AbstractHttpServlet
 	{
 		////////// THIS IS THE SOLE TOPLEVEL ENTRYPOINT FOR ALL HTTP REQUESTS FOR MANYWIKI //////////
 		
-		getServletConfig().getServletContext().log("DFLKDSJFLJF 1) "+response.isCommitted());  //TODO REMOVE
-		
-		String uri = request.getRequestURI();
-		
-		final String ajaxPrefix = "/ajax/";
-		
-		if (uri.startsWith(ajaxPrefix))
+		try
 		{
-			//All AJAX interactions!
-			WikiAjaxletDispatcher.dispatch(wikiEngine, ajaxPrefix, request, response);
-		}
-		else
-		{
-			//All other interactions!
-			// (delegates to a Spots ActionBean :3 )
+			getServletConfig().getServletContext().log("DFLKDSJFLJF 1) "+response.isCommitted());  //TODO REMOVE
 			
-			getServletConfig().getServletContext().log("DFLKDSJFLJF 2) "+response.isCommitted());  //TODO REMOVE
-			PairOrdered<Class<? extends ManyWikiActionBean>, String> p = getActionBeanClassAndViewResourcePathname(request.getRequestURI());  //getRequestURI() should really be getRequestURIPath() because it doesn't include the query string (which is the only thing it could include other than the path in HTTP!)
+			String uri = request.getRequestURI();
 			
-			Class<? extends ManyWikiActionBean> actionBeanClass = p.getA();
-			String viewResourcePath = p.getB();
+			final String ajaxPrefix = "/ajax/";
 			
-			UnaryProcedure<ManyWikiActionBean> initializeActionBean = bean ->
+			if (uri.startsWith(ajaxPrefix))
 			{
-				bean.setViewResourcePath(viewResourcePath);
-				bean.setWikiEngine(wikiEngine);
-			};
-			
-			getServletConfig().getServletContext().log("DFLKDSJFLJF 3) "+response.isCommitted());  //TODO REMOVE
-			SpotsDispatcher.dispatch(getServletConfig().getServletContext(), request, response, actionBeanClass, initializeActionBean, TemporaryManyWikiRoot.isLoggingAllHitsToServletLogs());
+				//All AJAX interactions!
+				WikiAjaxletDispatcher.dispatch(wikiEngine, ajaxPrefix, request, response);
+			}
+			else
+			{
+				//All other interactions!
+				// (delegates to a Spots ActionBean :3 )
+				
+				getServletConfig().getServletContext().log("DFLKDSJFLJF 2) "+response.isCommitted());  //TODO REMOVE
+				PairOrdered<Class<? extends ManyWikiActionBean>, String> p = getActionBeanClassAndViewResourcePathname(request.getRequestURI());  //getRequestURI() should really be getRequestURIPath() because it doesn't include the query string (which is the only thing it could include other than the path in HTTP!)
+				
+				Class<? extends ManyWikiActionBean> actionBeanClass = p.getA();
+				String viewResourcePath = p.getB();
+				
+				UnaryProcedure<ManyWikiActionBean> initializeActionBean = bean ->
+				{
+					bean.setViewResourcePath(viewResourcePath);
+					bean.setWikiEngine(wikiEngine);
+				};
+				
+				getServletConfig().getServletContext().log("DFLKDSJFLJF 3) "+response.isCommitted());  //TODO REMOVE
+				SpotsDispatcher.dispatch(getServletConfig().getServletContext(), request, response, actionBeanClass, initializeActionBean, TemporaryManyWikiRoot.isLoggingAllHitsToServletLogs());
+			}
+		}
+		catch (Throwable t)
+		{
+			printStackTraceFully(t);
 		}
 	}
 	
