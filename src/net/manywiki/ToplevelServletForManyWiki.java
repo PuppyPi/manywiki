@@ -56,8 +56,6 @@ extends AbstractHttpServlet
 		
 		try
 		{
-			getServletConfig().getServletContext().log("DFLKDSJFLJF 1) "+response.isCommitted());  //TODO REMOVE
-			
 			String uri = request.getRequestURI();
 			
 			final String ajaxPrefix = "/ajax/";
@@ -72,7 +70,6 @@ extends AbstractHttpServlet
 				//All other interactions!
 				// (delegates to a Spots ActionBean :3 )
 				
-				getServletConfig().getServletContext().log("DFLKDSJFLJF 2) "+response.isCommitted());  //TODO REMOVE
 				PairOrdered<Class<? extends ManyWikiActionBean>, String> p = getActionBeanClassAndViewResourcePathname(request.getRequestURI());  //getRequestURI() should really be getRequestURIPath() because it doesn't include the query string (which is the only thing it could include other than the path in HTTP!)
 				
 				Class<? extends ManyWikiActionBean> actionBeanClass = p.getA();
@@ -84,7 +81,6 @@ extends AbstractHttpServlet
 					bean.setWikiEngine(wikiEngine);
 				};
 				
-				getServletConfig().getServletContext().log("DFLKDSJFLJF 3) "+response.isCommitted());  //TODO REMOVE
 				SpotsDispatcher.dispatch(getServletConfig().getServletContext(), request, response, actionBeanClass, initializeActionBean, TemporaryManyWikiRoot.isLoggingAllHitsToServletLogs());
 			}
 		}
