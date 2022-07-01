@@ -9,6 +9,7 @@ import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import net.manywiki.jee.TemporaryManyWikiRoot;
 import net.manywiki.jee.actions.ManyWikiActionBean;
 import net.manywiki.jee.actions.ManyWikiActionBeans;
@@ -27,13 +28,15 @@ import rebound.util.functional.FunctionInterfaces.UnaryProcedure;
 
 ////////// THIS IS THE SOLE TOPLEVEL CLASS FOR MANYWIKI //////////
 
-//TODO-PP use a decorator for the request to capture the session creation and set the expiration time of it! :D
-
 @AccessedDynamicallyOrExternallyToJavaOrKnownToBeInImportantSerializedUse   //If you rename this class or move it to a different package, you MUST UPDATE WEB.XML!!  But that is the only string or text file that needs to be updated if any codething in ManyWiki is renamed or reorganized! The rest can be done by normal automatic Java refactoring!!  :DD
 public class ToplevelServletForManyWiki
 extends AbstractHttpServlet
 {
+	public static final int SessionTimeoutInSeconds = 60*60*24*30;  //FIXME-PP Softcode this!!!
+	
 	protected WikiEngine wikiEngine;
+	
+	
 	
 	
 	@Override
@@ -53,6 +56,12 @@ extends AbstractHttpServlet
 	public void serviceHttp(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		////////// THIS IS THE SOLE TOPLEVEL ENTRYPOINT FOR ALL HTTP REQUESTS FOR MANYWIKI //////////
+		
+		
+		//Always create a session for ManyWiki, even if it's just an anonymous person on the internet, that way the "breadcrumb" thing will work (and we can't go back and make one after the response has been committed because we'll need to send a cookie!)
+		HttpSession session = request.getSession(true);
+		session.setMaxInactiveInterval(SessionTimeoutInSeconds);
+		
 		
 		try
 		{
