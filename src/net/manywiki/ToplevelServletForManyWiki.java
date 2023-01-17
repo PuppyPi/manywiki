@@ -102,7 +102,7 @@ extends AbstractHttpServlet
 	
 	
 	/**
-	 * @param requestURIPath just {@link URI#getPath()}, no query string or other things, like {@link HttpServletRequest#getRequestURI()} (confusingly) does.
+	 * @param requestURIPath just {@link URI#getPath()}, no query string or other things.  Eg, {@link HttpServletRequest#getRequestURI()}! (even though it confusingly implies it's the whole URI not just the path >>' ).
 	 */
 	public static PairOrdered<Class<? extends ManyWikiActionBean>, String> getActionBeanClassAndViewResourcePathname(String requestURIPath)
 	{
